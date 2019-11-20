@@ -30,6 +30,4 @@ describe('a palindrome function', () => {
     it('"   " is not a palindrome');
         expect(isPalindrome('  ')).toBe(false);
 
-    it('undefined is not a polindrome');
-        expect(isPalindrome()).toBe(false);
 });
