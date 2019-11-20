@@ -3,6 +3,8 @@ const {Movie} = require('./Movie');
 const {Rental} = require('./Rental');
 //const {REGULAR, NEW_RELEASE, CHILDRENS} = require('./movie-codes');
 
+
+
 describe('martin fowler\'s movie refactoring example', () => {
   const DAYS_RENTED_IS_1 = 1;
   const DAYS_RENTED_IS_2 = 2;
