@@ -1,4 +1,5 @@
 const {Movie} = require('./Movie')
+
 let Rental = (movie, daysRented) => {
 
   function getCharge() {
@@ -24,12 +25,21 @@ let Rental = (movie, daysRented) => {
     return subTotal;
   }
 
+  function getFrequentRenterPoints(){
+    let frequentRenterPoints = 1;
+    // add bonus for a day new release rental
+    if((movie.priceCode === Movie.NEW_RELEASE) &&
+      daysRented > 1)
+      frequentRenterPoints++;
+    return frequentRenterPoints;
+  }
 
   return {
     get movie() { return movie; },
     get daysRented() { return daysRented; },
-    getCharge
+    getCharge,
+    getFrequentRenterPoints
   };
 };
 
-module.exports = {Rental};
+module.exports = { Rental };

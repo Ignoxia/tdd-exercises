@@ -18,19 +18,15 @@ let Customer = (name) => {
         let rental = rentals[i];
 
         //noinspection Eslint
-        subTotal = rental.getCharge();
+        //subTotal = rental.getCharge();
 
         // add frequent renter points
-        frequentRenterPoints++;
-
-        // add bonus for a two day new release rental
-        if ((rental.movie.priceCode === Movie.NEW_RELEASE) &&
-            rental.daysRented > 1) frequentRenterPoints++;
+        frequentRenterPoints += rental.getFrequentRenterPoints();
 
         //show figures for this rental
-        statement += '\t' + rental.movie.title + '\t' + subTotal.toString(10) + '\n';
+        statement += '\t' + rental.movie.title + '\t' + rental.getCharge().toString(10) + '\n';
 
-        total += subTotal;
+        total += rental.getCharge();
       }
 
       //add footer lines
@@ -44,6 +40,8 @@ let Customer = (name) => {
 };
 
 module.exports = {Customer};
+
+
 
 
 
