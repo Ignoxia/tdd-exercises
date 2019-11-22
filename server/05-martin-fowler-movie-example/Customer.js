@@ -5,14 +5,11 @@ let Customer = (name) => {
   let rentals = [];
 
   let getTotalCharge = () =>{
-    for (let i = 0; i < rentals.length; i++) {
-      let subTotal = 0;
-      // // add frequent renter points
-      frequentRenterPoints += rentals[i].getFrequentRenterPoints();
-      // //show figures for this rental
-      statement += '\t' + rentals[i].movie.title + '\t' + rentals[i].getCharge().toString(10) + '\n';
+    let total = 0;
+    for (let i = 0; i < rentals.length; i++){
       total += rentals[i].getCharge();
     }
+    return total;
   }
 
   let getTotalFrequentRenterPoints = () =>{
@@ -21,7 +18,7 @@ let Customer = (name) => {
       getTotalFrequentRenterPoints += rentals[i].getFrequentRenterPoints();
     } 
     return getTotalFrequentRenterPoints;
-  },
+  }
 
   return {
     get name() { return name; },
@@ -32,8 +29,11 @@ let Customer = (name) => {
       let frequentRenterPoints = 0;
       let statement = 'Rental Record for ' + name + '\n';
 
+      for (let i = 0; i < rentals.length; i++){
+        statement += '\t' + rentals[i].movie.title + '\t' + rentals[i].getCharge() + '\n';
+      }
       //add footer lines
-      statement += 'Amount owed is ' + getTotalCharge;
+      statement += 'Amount owed is ' + getTotalCharge() + '\n';
       statement += 'You earned ' + getTotalFrequentRenterPoints() +
           ' frequent renter points';
 
