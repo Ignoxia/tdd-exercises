@@ -4,6 +4,25 @@ const {Movie} = require('./Movie');
 let Customer = (name) => {
   let rentals = [];
 
+  let getTotalCharge = () =>{
+    for (let i = 0; i < rentals.length; i++) {
+      let subTotal = 0;
+      // // add frequent renter points
+      frequentRenterPoints += rentals[i].getFrequentRenterPoints();
+      // //show figures for this rental
+      statement += '\t' + rentals[i].movie.title + '\t' + rentals[i].getCharge().toString(10) + '\n';
+      total += rentals[i].getCharge();
+    }
+  }
+
+  let getTotalFrequentRenterPoints = () =>{
+    let getTotalFrequentRenterPoints = 0;
+    for (let i = 0; i < rentals.length; i++){
+      getTotalFrequentRenterPoints += rentals[i].getFrequentRenterPoints();
+    } 
+    return getTotalFrequentRenterPoints;
+  },
+
   return {
     get name() { return name; },
     addRental(rental) { rentals.push(rental); },
@@ -13,25 +32,9 @@ let Customer = (name) => {
       let frequentRenterPoints = 0;
       let statement = 'Rental Record for ' + name + '\n';
 
-      for (let i = 0; i < rentals.length; i++) {
-        let subTotal = 0;
-        let rental = rentals[i];
-
-        //noinspection Eslint
-        //subTotal = rental.getCharge();
-
-        // add frequent renter points
-        frequentRenterPoints += rental.getFrequentRenterPoints();
-
-        //show figures for this rental
-        statement += '\t' + rental.movie.title + '\t' + rental.getCharge().toString(10) + '\n';
-
-        total += rental.getCharge();
-      }
-
       //add footer lines
-      statement += 'Amount owed is ' + total.toString(10) + '\n';
-      statement += 'You earned ' + String(frequentRenterPoints) +
+      statement += 'Amount owed is ' + getTotalCharge;
+      statement += 'You earned ' + getTotalFrequentRenterPoints() +
           ' frequent renter points';
 
       return statement;
